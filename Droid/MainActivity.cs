@@ -2,6 +2,7 @@ using System;
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using ImageCircle.Forms.Plugin.Droid;
 using Xamarin.Forms.Platform.Android;
 
 namespace CoffeeCups.Droid
@@ -20,6 +21,7 @@ namespace CoffeeCups.Droid
 			global::Xamarin.Forms.Forms.Init (this, bundle);
 
             FormsToolkit.Droid.Toolkit.Init();
+            ImageCircleRenderer.Init();
             Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
 
             #if ENABLE_TEST_CLOUD

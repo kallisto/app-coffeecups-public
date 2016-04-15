@@ -38,13 +38,16 @@ namespace CoffeeCups
 
 
         [Newtonsoft.Json.JsonIgnore]
-        public string DateDisplay { get { return DateUtc.ToLocalTime().ToString("d"); } }
+        public string DateDisplay => DateUtc.ToLocalTime().ToString("d"); 
 
         [Newtonsoft.Json.JsonIgnore]
-        public string TimeDisplay { get { return DateUtc.ToLocalTime().ToString("t"); } }
+        public string TimeDisplay => DateUtc.ToLocalTime().ToString("t"); 
 
         [Newtonsoft.Json.JsonIgnore]
-        public string AtHomeDisplay { get { return MadeAtHome ? "Made At Home" : string.Empty; } }
+        public string AtHomeDisplay => MadeAtHome ? "Made At Home" : string.Empty;
+
+        [Newtonsoft.Json.JsonIgnore]
+        public string Image => MadeAtHome ? "home.png" : "out.png";
     }
 }
 

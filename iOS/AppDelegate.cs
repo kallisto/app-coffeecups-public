@@ -6,6 +6,7 @@ using Foundation;
 using UIKit;
 using FormsToolkit;
 using Xamarin.Forms;
+using ImageCircle.Forms.Plugin.iOS;
 
 namespace CoffeeCups.iOS
 {
@@ -52,6 +53,7 @@ namespace CoffeeCups.iOS
             UISwitch.Appearance.OnTintColor = tint;
 
             global::Xamarin.Forms.Forms.Init();
+            ImageCircleRenderer.Init();
 
             #if ENABLE_TEST_CLOUD
             Xamarin.Calabash.Start();
