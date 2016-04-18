@@ -100,12 +100,16 @@ namespace ImageCircle.Forms.Plugin.Droid
                 paint.SetStyle(Paint.Style.Fill);
                 paint.Color = ((CircleImage)Element).FillColor.ToAndroid();
                 canvas.DrawPath(path, paint);
-                paint.Dispose();
 
 
                 var result = base.DrawChild(canvas, child, drawingTime);
 
-                canvas.Restore();
+				paint.Color = Android.Graphics.Color.LimeGreen;
+				paint.Alpha = 96;
+				canvas.DrawPath (path, paint);
+				paint.Dispose ();
+
+				canvas.Restore();
 
                 path = new Path();
                 path.AddCircle(Width / 2, Height / 2, radius, Path.Direction.Ccw);

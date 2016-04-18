@@ -1,5 +1,6 @@
 ﻿using ImageCircle.Forms.Plugin.Abstractions;
 using System;
+using System.Linq;
 using Xamarin.Forms;
 using ImageCircle.Forms.Plugin.iOS;
 using Xamarin.Forms.Platform.iOS;
@@ -48,9 +49,9 @@ namespace ImageCircle.Forms.Plugin.iOS
             base.OnElementPropertyChanged(sender, e);
             if (e.PropertyName == VisualElement.HeightProperty.PropertyName ||
                 e.PropertyName == VisualElement.WidthProperty.PropertyName ||
-              e.PropertyName == CircleImage.BorderColorProperty.PropertyName ||
-              e.PropertyName == CircleImage.BorderThicknessProperty.PropertyName ||
-              e.PropertyName == CircleImage.FillColorProperty.PropertyName)
+			    e.PropertyName == CircleImage.BorderColorProperty.PropertyName ||
+			    e.PropertyName == CircleImage.BorderThicknessProperty.PropertyName ||
+			    e.PropertyName == CircleImage.FillColorProperty.PropertyName)
             {
                 CreateCircle();
             }
@@ -67,6 +68,15 @@ namespace ImageCircle.Forms.Plugin.iOS
                 Control.Layer.BorderWidth = ((CircleImage)Element).BorderThickness;
                 Control.BackgroundColor = ((CircleImage)Element).FillColor.ToUIColor();
                 Control.ClipsToBounds = true;
+				var tintLayer = Control.Layer.Sublayers?.FirstOrDefault ();
+				if (tintLayer == null) {
+					tintLayer = new CoreAnimation.CALayer {
+						BackgroundColor = UIKit.UIColor.Blue.CGColor,
+						Opacity = 0.4f,
+					};
+					Control.Layer.AddSublayer (tintLayer);
+				}
+				tintLayer.Frame = new CoreGraphics.CGRect (0, 0, Element.Width, Element.Height);
             }
             catch (Exception ex)
             {
