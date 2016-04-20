@@ -1,6 +1,7 @@
 ﻿using ImageCircle.Forms.Plugin.Abstractions;
 using Android.Runtime;
 using Android.Views;
+using Android.Util;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Android.Graphics;
@@ -18,6 +19,10 @@ namespace ImageCircle.Forms.Plugin.Droid
     [Preserve(AllMembers = true)]
     public class ImageCircleRenderer : ImageRenderer
     {
+		Path path = new Path ();
+		Paint paint = new Paint ();
+
+
         /// <summary>
         /// Used for registration with dependency service
         /// </summary>
@@ -79,54 +84,37 @@ namespace ImageCircle.Forms.Plugin.Droid
                 {
                     var logicalDensity = Xamarin.Forms.Forms.Context.Resources.DisplayMetrics.Density;
                     strokeWidth = (int)Math.Ceiling(borderThickness * logicalDensity + .5f);
-                }
+				}
 
-                radius -= strokeWidth / 2;
+                radius -= strokeWidth;
 
+				path.Reset ();
+				path.AddCircle(Width / 2.0f, Height / 2.0f, radius, Path.Direction.Ccw);
 
-
-
-                var path = new Path();
-                path.AddCircle(Width / 2.0f, Height / 2.0f, radius, Path.Direction.Ccw);
-
-
-                canvas.Save();
-                canvas.ClipPath(path);
-
-
-
-                var paint = new Paint();
                 paint.AntiAlias = true;
+
+				if (strokeWidth > 0.0f)
+				{
+					paint.SetStyle(Paint.Style.Stroke);
+					paint.Color = ((CircleImage)Element).BorderColor.ToAndroid();
+					paint.StrokeWidth = strokeWidth;
+					canvas.DrawPath(path, paint);
+				}
+
                 paint.SetStyle(Paint.Style.Fill);
                 paint.Color = ((CircleImage)Element).FillColor.ToAndroid();
                 canvas.DrawPath(path, paint);
 
-
-                var result = base.DrawChild(canvas, child, drawingTime);
-
-				paint.Color = Android.Graphics.Color.LimeGreen;
-				paint.Alpha = 96;
-				canvas.DrawPath (path, paint);
-				paint.Dispose ();
-
+				canvas.Save();
+				canvas.ClipPath(path);
+				var result = base.DrawChild(canvas, child, drawingTime);
 				canvas.Restore();
 
-                path = new Path();
-                path.AddCircle(Width / 2, Height / 2, radius, Path.Direction.Ccw);
+				paint.Color = Android.Graphics.Color.BlanchedAlmond;
+				paint.SetStyle(Paint.Style.Fill);
+				paint.Alpha = 99;
+				canvas.DrawPath (path, paint);
 
-
-                if (strokeWidth > 0.0f)
-                {
-                    paint = new Paint();
-                    paint.AntiAlias = true;
-                    paint.StrokeWidth = strokeWidth;
-                    paint.SetStyle(Paint.Style.Stroke);
-                    paint.Color = ((CircleImage)Element).BorderColor.ToAndroid();
-                    canvas.DrawPath(path, paint);
-                    paint.Dispose();
-                }
-
-                path.Dispose();
                 return result;
             }
             catch (Exception ex)

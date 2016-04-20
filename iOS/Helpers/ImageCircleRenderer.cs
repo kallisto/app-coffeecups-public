@@ -71,8 +71,8 @@ namespace ImageCircle.Forms.Plugin.iOS
 				var tintLayer = Control.Layer.Sublayers?.FirstOrDefault ();
 				if (tintLayer == null) {
 					tintLayer = new CoreAnimation.CALayer {
-						BackgroundColor = UIKit.UIColor.Blue.CGColor,
-						Opacity = 0.4f,
+						BackgroundColor = UIKit.UIColor.Purple.CGColor,
+						Opacity = 0.5f,
 					};
 					Control.Layer.AddSublayer (tintLayer);
 				}
