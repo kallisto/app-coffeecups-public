@@ -15,13 +15,12 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <StackLayout Orientation="Horizontal" Padding="16" Spacing="16" BackgroundColor="Olive">
+            <StackLayout Orientation="Horizontal" Padding="16" Spacing="16" BackgroundColor="#F2C500">
                 <Label Text="Made at Home?"
                         TextColor="White" 
                         VerticalOptions="Center" 
                         HorizontalOptions="Start"
-                        FontSize="16"
-						FontAttributes="Bold">
+                        FontSize="16">
                     <Label.FontSize>
                         <OnPlatform x:TypeArguments="x:Double" iOS="16" Android="16" WinPhone="12" />
                     </Label.FontSize>
@@ -32,7 +31,7 @@
                         IsEnabled="{Binding IsNotBusy}" 
                         VerticalOptions="Center"
                         TextColor="White"
-                        BackgroundColor="Olive"/>
+                        BackgroundColor="#F2C500"/>
             </StackLayout>
             <ListView 
                 Grid.Row="1"
