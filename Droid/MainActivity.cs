@@ -21,7 +21,7 @@ namespace CoffeeCups.Droid
 			global::Xamarin.Forms.Forms.Init (this, bundle);
 
             FormsToolkit.Droid.Toolkit.Init();
-            ImageCircleRenderer.Init();
+            ImageCircleRenderer.Initialize();
             Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
 
             #if ENABLE_TEST_CLOUD

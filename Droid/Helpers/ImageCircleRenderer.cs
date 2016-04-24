@@ -13,85 +13,74 @@ using Color = Xamarin.Forms.Color;
 [assembly: ExportRenderer(typeof(CircleImage), typeof(ImageCircleRenderer))]
 namespace ImageCircle.Forms.Plugin.Droid
 {
-    /// <summary>
-    /// ImageCircle Implementation
-    /// </summary>
-    [Preserve(AllMembers = true)]
-    public class ImageCircleRenderer : ImageRenderer
-    {
-		Path path = new Path ();
-		Paint paint = new Paint ();
+	/// <summary>
+	/// ImageCircle Implementation
+	/// </summary>
+	[Preserve(AllMembers = true)]
+	public class ImageCircleRenderer : ImageRenderer
+	{
+		Path path = new Path();
+		Paint paint = new Paint();
 
 
-        /// <summary>
-        /// Used for registration with dependency service
-        /// </summary>
-        public async static void Init()
-        {
-            var temp = DateTime.Now;
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="e"></param>
-        protected override void OnElementChanged(ElementChangedEventArgs<Image> e)
-        {
-            base.OnElementChanged(e);
+		/// <summary>
+		/// Used for registration with dependency service
+		/// </summary>
+		public static void Initialize()
+		{
+			var temp = DateTime.Now;
+		}
 
-            if (e.OldElement == null)
-            {
-                //Only enable hardware accelleration on lollipop
-                if ((int)Android.OS.Build.VERSION.SdkInt < 21)
-                {
-                    SetLayerType(LayerType.Software, null);
-                }
+		protected override void OnElementChanged(ElementChangedEventArgs<Image> e)
+		{
+			base.OnElementChanged(e);
 
-            }
-        }
-
-        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            base.OnElementPropertyChanged(sender, e);
-
-            if (e.PropertyName == CircleImage.BorderColorProperty.PropertyName ||
-              e.PropertyName == CircleImage.BorderThicknessProperty.PropertyName ||
-              e.PropertyName == CircleImage.FillColorProperty.PropertyName)
-            {
-                this.Invalidate();
-            }
-        }
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="canvas"></param>
-        /// <param name="child"></param>
-        /// <param name="drawingTime"></param>
-        /// <returns></returns>
-        protected override bool DrawChild(Canvas canvas, Android.Views.View child, long drawingTime)
-        {
-            try
-            {
-
-                var radius = Math.Min(Width, Height) / 2;
-
-                var borderThickness = (float)((CircleImage)Element).BorderThickness;
-
-                int strokeWidth = 0;
-
-                if (borderThickness > 0)
-                {
-                    var logicalDensity = Xamarin.Forms.Forms.Context.Resources.DisplayMetrics.Density;
-                    strokeWidth = (int)Math.Ceiling(borderThickness * logicalDensity + .5f);
+			if (e.OldElement == null)
+			{
+				//Only enable hardware accelleration on lollipop
+				if ((int)Android.OS.Build.VERSION.SdkInt < 21)
+				{
+					SetLayerType(LayerType.Software, null);
 				}
 
-                radius -= strokeWidth;
+			}
+		}
 
-				path.Reset ();
+		protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+		{
+			base.OnElementPropertyChanged(sender, e);
+
+			if (e.PropertyName == CircleImage.BorderColorProperty.PropertyName ||
+			  e.PropertyName == CircleImage.BorderThicknessProperty.PropertyName ||
+			  e.PropertyName == CircleImage.FillColorProperty.PropertyName)
+			{
+				this.Invalidate();
+			}
+		}
+
+		protected override bool DrawChild(Canvas canvas, Android.Views.View child, long drawingTime)
+		{
+			try
+			{
+
+				var radius = Math.Min(Width, Height) / 2;
+
+				var borderThickness = (float)((CircleImage)Element).BorderThickness;
+
+				int strokeWidth = 0;
+
+				if (borderThickness > 0)
+				{
+					var logicalDensity = Xamarin.Forms.Forms.Context.Resources.DisplayMetrics.Density;
+					strokeWidth = (int)Math.Ceiling(borderThickness * logicalDensity + .5f);
+				}
+
+				radius -= strokeWidth;
+
+				path.Reset();
 				path.AddCircle(Width / 2.0f, Height / 2.0f, radius, Path.Direction.Ccw);
 
-                paint.AntiAlias = true;
+				paint.AntiAlias = true;
 
 				if (strokeWidth > 0.0f)
 				{
@@ -101,9 +90,9 @@ namespace ImageCircle.Forms.Plugin.Droid
 					canvas.DrawPath(path, paint);
 				}
 
-                paint.SetStyle(Paint.Style.Fill);
-                paint.Color = ((CircleImage)Element).FillColor.ToAndroid();
-                canvas.DrawPath(path, paint);
+				paint.SetStyle(Paint.Style.Fill);
+				paint.Color = ((CircleImage)Element).FillColor.ToAndroid();
+				canvas.DrawPath(path, paint);
 
 				canvas.Save();
 				canvas.ClipPath(path);
@@ -112,17 +101,17 @@ namespace ImageCircle.Forms.Plugin.Droid
 
 				paint.Color = Android.Graphics.Color.BlanchedAlmond;
 				paint.SetStyle(Paint.Style.Fill);
-				paint.Alpha = 99;
-				canvas.DrawPath (path, paint);
+				paint.Alpha = 95;
+				canvas.DrawPath(path, paint);
 
-                return result;
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine("Unable to create circle image: " + ex);
-            }
+				return result;
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine("Unable to create circle image: " + ex);
+			}
 
-            return base.DrawChild(canvas, child, drawingTime);
-        }
-    }
+			return base.DrawChild(canvas, child, drawingTime);
+		}
+	}
 }

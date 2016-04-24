@@ -10,93 +10,94 @@ using CoffeeCups.Helpers;
 
 namespace CoffeeCups
 {
-    public class AzureService
-    {
-        public MobileServiceClient MobileService { get; set; }
-        IMobileServiceSyncTable<CupOfCoffee> coffeeTable;
+	public class AzureService
+	{
+		public MobileServiceClient MobileService { get; set; }
+		IMobileServiceSyncTable<CupOfCoffee> coffeeTable;
 
-        bool isInitialized;
-        public async Task Initialize()
-        {
-            if (isInitialized)
-                return;
+		bool isInitialized;
+		public async Task Initialize()
+		{
+			if (isInitialized)
+				return;
 
-            var time = Xamarin.Insights.TrackTime("InitializeTime");
-            time.Start();
-            
+			var time = Xamarin.Insights.TrackTime("InitializeTime");
+			time.Start();
 
-            var handler = new AuthHandler();
-            //Create our client
-            MobileService = new MobileServiceClient("https://mycoffeeapp.azurewebsites.net", handler);
-            handler.Client = MobileService;
 
-            if (!string.IsNullOrWhiteSpace (Settings.AuthToken) && !string.IsNullOrWhiteSpace (Settings.UserId)) {
-                MobileService.CurrentUser = new MobileServiceUser (Settings.UserId);
-                MobileService.CurrentUser.MobileServiceAuthenticationToken = Settings.AuthToken;
-            }
-            
-            const string path = "syncstore.db";
-            //setup our local sqlite store and intialize our table
-            var store = new MobileServiceSQLiteStore(path);
+			var handler = new AuthHandler();
+			//Create our client
+			MobileService = new MobileServiceClient("https://mycoffeeapp.azurewebsites.net", handler);
+			handler.Client = MobileService;
 
-            store.DefineTable<CupOfCoffee>();
+			if (!string.IsNullOrWhiteSpace(Settings.AuthToken) && !string.IsNullOrWhiteSpace(Settings.UserId))
+			{
+				MobileService.CurrentUser = new MobileServiceUser(Settings.UserId);
+				MobileService.CurrentUser.MobileServiceAuthenticationToken = Settings.AuthToken;
+			}
 
-            await MobileService.SyncContext.InitializeAsync(store, new MobileServiceSyncHandler());
+			const string path = "syncstore.db";
+			//setup our local sqlite store and intialize our table
+			var store = new MobileServiceSQLiteStore(path);
 
-            //Get our sync table that will call out to azure
-            coffeeTable = MobileService.GetSyncTable<CupOfCoffee>();
+			store.DefineTable<CupOfCoffee>();
 
-            isInitialized = true;
-            time.Stop();
-        }
+			await MobileService.SyncContext.InitializeAsync(store, new MobileServiceSyncHandler());
 
-        public async Task<IEnumerable<CupOfCoffee>> GetCoffees()
-        {
-            await Initialize();
-            await SyncCoffee();
-            return await coffeeTable.OrderBy(c => c.DateUtc).ToEnumerableAsync();
-        }
+			//Get our sync table that will call out to azure
+			coffeeTable = MobileService.GetSyncTable<CupOfCoffee>();
 
-        public async Task<CupOfCoffee> AddCoffee(bool atHome)
-        {
-            await Initialize();
+			isInitialized = true;
+			time.Stop();
+		}
 
-            var time = Xamarin.Insights.TrackTime("AddCoffeeTime");
-            time.Start();
-            //create and insert coffee
-            var coffee = new CupOfCoffee
-            {
-                    DateUtc = DateTime.UtcNow,
-                    MadeAtHome = atHome,
-                    OS = Device.OS.ToString()
-            };
+		public async Task<IEnumerable<CupOfCoffee>> GetCoffees()
+		{
+			await Initialize();
+			await SyncCoffee();
+			return await coffeeTable.OrderBy(c => c.DateUtc).ToEnumerableAsync();
+		}
 
-            await coffeeTable.InsertAsync(coffee);
-            time.Stop();
+		public async Task<CupOfCoffee> AddCoffee(bool atHome)
+		{
+			await Initialize();
 
-            //Synchronize coffee
-            await SyncCoffee();
+			var time = Xamarin.Insights.TrackTime("AddCoffeeTime");
+			time.Start();
+			//create and insert coffee
+			var coffee = new CupOfCoffee
+			{
+				DateUtc = DateTime.UtcNow,
+				//MadeAtHome = atHome,
+				OS = Device.OS.ToString()
+			};
 
-            return coffee;
-        }
+			await coffeeTable.InsertAsync(coffee);
+			time.Stop();
 
-        public async Task SyncCoffee()
-        {
-            var time = Xamarin.Insights.TrackTime("SyncCoffeeTime");
-            time.Start();
-            try
-            {
-                //pull down all latest changes and then push current coffees up
-                await coffeeTable.PullAsync("allCoffees", coffeeTable.CreateQuery());
-                await MobileService.SyncContext.PushAsync();
-            }
-            catch(Exception ex)
-            {
-                Debug.WriteLine("Unable to sync coffees, that is alright as we have offline capabilities: " + ex);
-            }
+			//Synchronize coffee
+			await SyncCoffee();
 
-            time.Stop();
-        }
-    }
+			return coffee;
+		}
+
+		public async Task SyncCoffee()
+		{
+			var time = Xamarin.Insights.TrackTime("SyncCoffeeTime");
+			time.Start();
+			try
+			{
+				//pull down all latest changes and then push current coffees up
+				await coffeeTable.PullAsync("allCoffees", coffeeTable.CreateQuery());
+				await MobileService.SyncContext.PushAsync();
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine("Unable to sync coffees, that is alright as we have offline capabilities: " + ex);
+			}
+
+			time.Stop();
+		}
+	}
 }
-    
+

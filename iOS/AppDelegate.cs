@@ -53,7 +53,7 @@ namespace CoffeeCups.iOS
             UISwitch.Appearance.OnTintColor = tint;
 
             global::Xamarin.Forms.Forms.Init();
-            ImageCircleRenderer.Init();
+            ImageCircleRenderer.Initialize();
 
             #if ENABLE_TEST_CLOUD
             Xamarin.Calabash.Start();
