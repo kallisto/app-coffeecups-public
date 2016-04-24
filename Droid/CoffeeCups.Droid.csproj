@@ -78,14 +78,6 @@
     <Reference Include="Microsoft.WindowsAzure.Mobile.Ext">
       <HintPath>..\packages\Microsoft.Azure.Mobile.Client.2.0.1\lib\monoandroid\Microsoft.WindowsAzure.Mobile.Ext.dll</HintPath>
     </Reference>
-    <Reference Include="Xamarin.Forms.Core.Design, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xamarin.Forms.2.1.0.6524\lib\MonoAndroid10\Design\Xamarin.Forms.Core.Design.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Xaml.Design, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xamarin.Forms.2.1.0.6524\lib\MonoAndroid10\Design\Xamarin.Forms.Xaml.Design.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="FormsToolkit.Android">
       <HintPath>..\packages\FormsToolkit.1.1.14\lib\MonoAndroid10\FormsToolkit.Android.dll</HintPath>
     </Reference>
@@ -193,6 +185,9 @@
     <AndroidResource Include="Resources\values-v21\styles.xml" />
     <AndroidResource Include="Resources\drawable\out.png" />
     <AndroidResource Include="Resources\drawable\home.png" />
+    <AndroidResource Include="Resources\drawable\coffee1.jpg" />
+    <AndroidResource Include="Resources\drawable\coffee2.jpg" />
+    <AndroidResource Include="Resources\drawable\coffee3.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" />
