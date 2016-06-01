@@ -10,26 +10,27 @@ namespace CoffeeCups
     public partial class CoffeesPage : ContentPage
     {
         CoffeesViewModel vm;
+
         public CoffeesPage()
         {
             InitializeComponent();
+
             BindingContext = vm = new CoffeesViewModel();
+
             ListViewCoffees.ItemTapped += (sender, e) =>
             {
                 if(Device.OS == TargetPlatform.iOS || Device.OS == TargetPlatform.Android)
                     ListViewCoffees.SelectedItem = null;
             };
 
-            if (Device.OS != TargetPlatform.iOS && Device.OS != TargetPlatform.Android)
-            {
-                ToolbarItems.Add(new ToolbarItem
-                {
-                    Text ="Refresh",
-                    Command=vm.LoadCoffeesCommand
-                });
-            }
-
-
+			if (Device.OS != TargetPlatform.iOS && Device.OS != TargetPlatform.Android)
+			{
+				ToolbarItems.Add(new ToolbarItem
+				{
+					Text = "Refresh",
+					Command = vm.LoadCoffeesCommand
+				});
+			}
         }
 
         protected override void OnAppearing()
@@ -51,9 +52,9 @@ namespace CoffeeCups
         void ConnecitvityChanged (object sender, Plugin.Connectivity.Abstractions.ConnectivityChangedEventArgs e)
         {
             Device.BeginInvokeOnMainThread(() =>
-                {
-                    OfflineStack.IsVisible = !e.IsConnected;
-                });
+            {
+            	OfflineStack.IsVisible = !e.IsConnected;
+            });
         }
     }
 }

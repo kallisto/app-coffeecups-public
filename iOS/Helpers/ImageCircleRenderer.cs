@@ -12,6 +12,7 @@ using Foundation;
 using MonoTouch.Foundation;
 #endif
 
+// This image circle renderer class is supported by a renderer of type ImageCircleRenderer
 [assembly: ExportRenderer(typeof(ImageCircle.Forms.Plugin.Abstractions.CircleImage), typeof(ImageCircleRenderer))]
 namespace ImageCircle.Forms.Plugin.iOS
 {
@@ -39,6 +40,8 @@ namespace ImageCircle.Forms.Plugin.iOS
 
 		protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
+			// if any of the properties of the image change - either the properties of the underlying 
+			// VisualElement class or the properties we've set for the CircleImage, draw the circle
 			base.OnElementPropertyChanged(sender, e);
 			if (e.PropertyName == VisualElement.HeightProperty.PropertyName ||
 				e.PropertyName == VisualElement.WidthProperty.PropertyName ||
@@ -66,11 +69,11 @@ namespace ImageCircle.Forms.Plugin.iOS
 				{
 					tintLayer = new CoreAnimation.CALayer
 					{
-						BackgroundColor = UIKit.UIColor.Purple.CGColor,
+						BackgroundColor = UIKit.UIColor.Green.CGColor,
 						Opacity = 0.5f
 					};
 					Control.Layer.AddSublayer(tintLayer);
-				}
+				}	
 				tintLayer.Frame = new CoreGraphics.CGRect(0, 0, Element.Width, Element.Height);
 			}
 			catch (Exception ex)

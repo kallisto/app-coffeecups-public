@@ -21,9 +21,6 @@ namespace CoffeeCups
 			if (isInitialized)
 				return;
 
-			var time = Xamarin.Insights.TrackTime("InitializeTime");
-			time.Start();
-
 
 			var handler = new AuthHandler();
 			//Create our client
@@ -48,7 +45,6 @@ namespace CoffeeCups
 			coffeeTable = MobileService.GetSyncTable<CupOfCoffee>();
 
 			isInitialized = true;
-			time.Stop();
 		}
 
 		public async Task<IEnumerable<CupOfCoffee>> GetCoffees()
@@ -58,22 +54,18 @@ namespace CoffeeCups
 			return await coffeeTable.OrderBy(c => c.DateUtc).ToEnumerableAsync();
 		}
 
-		public async Task<CupOfCoffee> AddCoffee(bool atHome)
+		public async Task<CupOfCoffee> AddCoffee()
 		{
 			await Initialize();
 
-			var time = Xamarin.Insights.TrackTime("AddCoffeeTime");
-			time.Start();
 			//create and insert coffee
 			var coffee = new CupOfCoffee
 			{
 				DateUtc = DateTime.UtcNow,
-				//MadeAtHome = atHome,
 				OS = Device.OS.ToString()
 			};
 
 			await coffeeTable.InsertAsync(coffee);
-			time.Stop();
 
 			//Synchronize coffee
 			await SyncCoffee();
@@ -83,8 +75,6 @@ namespace CoffeeCups
 
 		public async Task SyncCoffee()
 		{
-			var time = Xamarin.Insights.TrackTime("SyncCoffeeTime");
-			time.Start();
 			try
 			{
 				//pull down all latest changes and then push current coffees up
@@ -95,8 +85,6 @@ namespace CoffeeCups
 			{
 				Debug.WriteLine("Unable to sync coffees, that is alright as we have offline capabilities: " + ex);
 			}
-
-			time.Stop();
 		}
 	}
 }

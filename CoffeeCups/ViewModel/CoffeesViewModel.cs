@@ -82,13 +82,6 @@ namespace CoffeeCups
 			CoffeesGrouped.ReplaceRange(groups);
 		}
 
-		bool atHome;
-		public bool AtHome
-		{
-			get { return atHome; }
-			set { SetProperty(ref atHome, value); }
-		}
-
 		ICommand addCoffeeCommand;
 		public ICommand AddCoffeeCommand =>
 			addCoffeeCommand ?? (addCoffeeCommand = new Command(async () => await ExecuteAddCoffeeCommandAsync()));
@@ -120,17 +113,13 @@ namespace CoffeeCups
 					IsBusy = true;
 				}
 
-				Xamarin.Insights.Track("CoffeeAdded");
-
-				var coffee = await azureService.AddCoffee(AtHome);
+				var coffee = await azureService.AddCoffee();
 				Coffees.Add(coffee);
 				SortCoffees();
 			}
 			catch (Exception ex)
 			{
 				Debug.WriteLine("OH NO!" + ex);
-				//This is okay because we can 
-				Xamarin.Insights.Report(ex);
 			}
 			finally
 			{

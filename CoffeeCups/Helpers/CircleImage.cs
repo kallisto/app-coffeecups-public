@@ -6,6 +6,7 @@ namespace ImageCircle.Forms.Plugin.Abstractions
 	/// <summary>
 	/// ImageCircle Interface
 	/// </summary>
+	/// Note: Image inherits from Xamarin.Forms.View
 	public class CircleImage : Image
 	{
 		/// <summary>

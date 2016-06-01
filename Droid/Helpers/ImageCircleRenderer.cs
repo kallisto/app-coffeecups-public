@@ -99,7 +99,7 @@ namespace ImageCircle.Forms.Plugin.Droid
 				var result = base.DrawChild(canvas, child, drawingTime);
 				canvas.Restore();
 
-				paint.Color = Android.Graphics.Color.BlanchedAlmond;
+				paint.Color = Android.Graphics.Color.PapayaWhip;
 				paint.SetStyle(Paint.Style.Fill);
 				paint.Alpha = 95;
 				canvas.DrawPath(path, paint);

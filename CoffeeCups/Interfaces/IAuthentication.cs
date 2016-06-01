@@ -6,7 +6,8 @@ namespace CoffeeCups
 {
     public interface IAuthentication
     {
-        Task<MobileServiceUser> LoginAsync(MobileServiceClient client, MobileServiceAuthenticationProvider provider);
+        Task<MobileServiceUser> LoginAsync(MobileServiceClient client, 
+		                                   MobileServiceAuthenticationProvider provider);
         void ClearCookies();
     }
 }

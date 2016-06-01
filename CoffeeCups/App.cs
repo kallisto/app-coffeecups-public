@@ -10,11 +10,7 @@ namespace CoffeeCups
 		public App()
 		{
 			// The root page of your application
-			MainPage = new NavigationPageNoLine(new CoffeesPage())
-			{
-				BarTextColor = Color.White,
-				BarBackgroundColor = Color.FromHex("#F2C500")
-			};
+			MainPage = new CoffeesPage();
 		}
 
 		protected override void OnStart()
