@@ -26,7 +26,6 @@ namespace CoffeeCups
 					await task;
 					info?.OnCompleted?.Invoke();
 				});
-			// Handle when your app starts
 		}
 
 		protected override void OnSleep()

@@ -13,17 +13,20 @@ namespace CoffeeCups.Droid
 		protected override void OnCreate (Bundle bundle)
 		{
 
+			// allows forms to bring material design to older API versions
             FormsAppCompatActivity.ToolbarResource = Resource.Layout.toolbar;
             FormsAppCompatActivity.TabLayoutResource = Resource.Layout.tabs;
          
-            base.OnCreate (bundle);
 			global::Xamarin.Forms.Forms.Init (this, bundle);
 
+			// init all the things we are using
             FormsToolkit.Droid.Toolkit.Init();
             ImageCircleRenderer.Initialize();
             Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
 
 			LoadApplication (new App ());
+
+			base.OnCreate(bundle);
 		}
 	}
 }

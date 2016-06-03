@@ -12,17 +12,17 @@ namespace CoffeeCups
 {
 	public class AzureService
 	{
+		bool isInitialized;
 		public MobileServiceClient MobileService { get; set; }
 		IMobileServiceSyncTable<CupOfCoffee> coffeeTable;
 
-		bool isInitialized;
 		public async Task Initialize()
 		{
 			if (isInitialized)
 				return;
 
-
 			var handler = new AuthHandler();
+
 			//Create our client
 			MobileService = new MobileServiceClient("https://mycoffeeapp.azurewebsites.net", handler);
 			handler.Client = MobileService;
@@ -34,11 +34,10 @@ namespace CoffeeCups
 			}
 
 			const string path = "syncstore.db";
+
 			//setup our local sqlite store and intialize our table
 			var store = new MobileServiceSQLiteStore(path);
-
 			store.DefineTable<CupOfCoffee>();
-
 			await MobileService.SyncContext.InitializeAsync(store, new MobileServiceSyncHandler());
 
 			//Get our sync table that will call out to azure
@@ -54,6 +53,7 @@ namespace CoffeeCups
 			return await coffeeTable.OrderBy(c => c.DateUtc).ToEnumerableAsync();
 		}
 
+		//TODO: pass in photo and description
 		public async Task<CupOfCoffee> AddCoffee()
 		{
 			await Initialize();
