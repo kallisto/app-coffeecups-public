@@ -26,7 +26,7 @@
 					</Label.FontSize>
 				</Label>
 				<Button Text="Add Coffee" 
-					Command="{Binding AddCoffeeCommand}" 
+					Command="{Binding TakePhotoCommand}" 
 					IsEnabled="{Binding IsNotBusy}" 
 					VerticalOptions="Center" 
 					HorizontalOptions="EndAndExpand" 
