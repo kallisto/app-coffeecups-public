@@ -16,8 +16,9 @@ namespace CoffeeCups.Droid
 			// allows forms to bring material design to older API versions
             FormsAppCompatActivity.ToolbarResource = Resource.Layout.toolbar;
             FormsAppCompatActivity.TabLayoutResource = Resource.Layout.tabs;
-         
-			global::Xamarin.Forms.Forms.Init (this, bundle);
+
+            base.OnCreate(bundle);
+            global::Xamarin.Forms.Forms.Init (this, bundle);
 
 			// init all the things we are using
             FormsToolkit.Droid.Toolkit.Init();
@@ -25,8 +26,6 @@ namespace CoffeeCups.Droid
             Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
 
 			LoadApplication (new App ());
-
-			base.OnCreate(bundle);
 		}
 	}
 }
