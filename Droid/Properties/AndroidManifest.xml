@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.refractored.coffeecups">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.xamarin.coffeeapp">
 	<uses-sdk />
 	<uses-permission android:name="android.permission.INTERNET" />
-	<application android:label="CoffeeCups" android:theme="@style/MyTheme"></application>
+	<application android:theme="@style/MyTheme" android:icon="@mipmap/ic_launcher" android:label="Coffee Appreciator"></application>
 </manifest>
