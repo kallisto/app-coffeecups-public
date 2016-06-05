@@ -196,5 +196,6 @@
     <BundleResource Include="Resources\coffee6.jpg" />
     <BundleResource Include="Resources\coffee7.jpg" />
     <BundleResource Include="Resources\coffee8.jpg" />
+    <BundleResource Include="Resources\kopi_luwak.jpg" />
   </ItemGroup>
 </Project>
