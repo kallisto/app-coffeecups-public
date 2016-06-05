@@ -9,13 +9,15 @@ namespace CoffeeCups
 {
     public partial class CoffeesPage : ContentPage
     {
-        CoffeesViewModel vm;
+		CoffeesViewModel vm;
 
-        public CoffeesPage()
+		public CoffeesPage(CoffeesViewModel viewModel)
         {
             InitializeComponent();
 
-            BindingContext = vm = new CoffeesViewModel();
+			BindingContext = vm = viewModel;
+
+			toolBar.Clicked += (sender, e) => Navigation.PushAsync(new AddCoffeePage(new AddCoffeeViewModel()));
 
             ListViewCoffees.ItemTapped += (sender, e) =>
             {
