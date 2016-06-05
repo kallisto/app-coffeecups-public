@@ -7,9 +7,12 @@ namespace CoffeeCups
 {
 	public partial class AddCoffeePage : ContentPage
 	{
-		public AddCoffeePage()
+
+		public AddCoffeePage(AddCoffeeViewModel vm)
 		{
 			InitializeComponent();
+
+			BindingContext = vm;
 		}
 	}
 }

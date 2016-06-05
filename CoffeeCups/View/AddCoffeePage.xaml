@@ -2,9 +2,35 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 		x:Class="CoffeeCups.AddCoffeePage">
-	<ContentPage.Content>
+	<StackLayout Orientation="Vertical"
+			VerticalOptions="StartAndExpand" 
+			HorizontalOptions="FillAndExpand">
 		<!--image view-->
-		<!--add title-->
+	    <Image Source="kopi_luwak.jpg"
+			HorizontalOptions="FillAndExpand">
+			<Image.GestureRecognizers>
+        		<TapGestureRecognizer Command="{Binding TakePhotoCommand}"/>
+    		</Image.GestureRecognizers>
+		</Image>
+		<!--add name-->
+		<Entry HorizontalOptions="FillAndExpand"
+			Placeholder="coffee name"
+			Text="{Binding Name}"/>
 		<!--add description-->
-	</ContentPage.Content>
+		<Editor HorizontalOptions="FillAndExpand"
+			VerticalOptions="FillAndExpand"
+			Text="{Binding Description}"
+			Keyboard="Chat"/>
+		<!--loading message-->
+		<Label Text="{Binding LoadingMessage}"
+			IsVisible="{Binding IsBusy}"
+			HorizontalOptions="FillAndExpand"
+			VerticalOptions="FillAndExpand"/>
+		<!--add button-->
+		<Button x:Name="AddNewCoffee"
+			HorizontalOptions="FillAndExpand"
+			Text="Add Coffee"
+			Command="{Binding AddCoffeeCommand}"
+			IsEnabled="{Binding IsNotBusy}"/>
+  	</StackLayout>
 </ContentPage>
