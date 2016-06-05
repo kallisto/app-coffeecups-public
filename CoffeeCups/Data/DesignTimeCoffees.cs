@@ -22,9 +22,10 @@ namespace CoffeeCups
 					new CupOfCoffee { Name = "Peruvian", Notes = "Hint of torched forest pine", DateUtc = Convert.ToDateTime("04/24/2016 20:10:25"), Image = "coffee6.jpg"},
 					new CupOfCoffee { Name = "Sumatra", Notes = "Like an orchestra of chocolate and dreams", DateUtc = Convert.ToDateTime("04/24/2016 8:12:20"), Image = "coffee7.jpg"},
 					new CupOfCoffee { Name = "Ethiopian", Notes = "Subtle suggestions of a starry night by the campfire", DateUtc = Convert.ToDateTime("04/24/2016 5:16:20"), Image = "coffee8.jpg"},
-				}.GroupBy(t => t.DateDisplay)
-				 .Select(t => new Grouping<string, CupOfCoffee>(t.Key, t))
-				 .ToArray();
+				}.GroupBy(c => c.DateDisplay)
+				 .Reverse()
+				 .Select(g => new Grouping<string, CupOfCoffee>(g.Key, g))
+				 .ToArray();	
 			}
 		}
 	}
