@@ -24,7 +24,7 @@ namespace CoffeeCups
 			var handler = new AuthHandler();
 
 			//Create our client
-			MobileService = new MobileServiceClient("https://mycoffeeapp.azurewebsites.net", handler);
+			MobileService = new MobileServiceClient("https://coffee-appreciator.azurewebsites.net", handler);
 			handler.Client = MobileService;
 
 			if (!string.IsNullOrWhiteSpace(Settings.AuthToken) && !string.IsNullOrWhiteSpace(Settings.UserId))
@@ -50,27 +50,26 @@ namespace CoffeeCups
 		{
 			await Initialize();
 			await SyncCoffee();
-			return await coffeeTable.OrderBy(c => c.DateUtc).ToEnumerableAsync();
+			return await coffeeTable.OrderByDescending(c => c.DateUtc).ToEnumerableAsync();
 		}
 
-		//TODO: pass in photo and description
-		public async Task<CupOfCoffee> AddCoffee()
+		public async Task AddCoffee(string name, string description, string image)
 		{
 			await Initialize();
 
-			//create and insert coffee
 			var coffee = new CupOfCoffee
 			{
+				OS = Device.OS.ToString(),
 				DateUtc = DateTime.UtcNow,
-				OS = Device.OS.ToString()
+				Name = name,
+				Notes = description,
+				//Image = path
 			};
 
 			await coffeeTable.InsertAsync(coffee);
 
 			//Synchronize coffee
 			await SyncCoffee();
-
-			return coffee;
 		}
 
 		public async Task SyncCoffee()
