@@ -17,21 +17,6 @@
 				<RowDefinition Height="*" />
 				<RowDefinition Height="Auto" />
 			</Grid.RowDefinitions>
-			<StackLayout Orientation="Horizontal"
-					IsVisible="{Binding IsBusy}"
-					Padding="16" 
-					Spacing="16" 
-					BackgroundColor="Maroon">
-				<Label Text="{Binding LoadingMessage}"
-						TextColor="White" 
-						VerticalOptions="Center" 
-						HorizontalOptions="CenterAndExpand" 
-						FontSize="30">
-					<Label.FontSize>
-						<OnPlatform x:TypeArguments="x:Double" iOS="18" Android="20" />
-					</Label.FontSize>
-				</Label>
-			</StackLayout>
 			<ListView Grid.Row="1" 
 					GroupDisplayBinding="{Binding Key}" 
 					IsGroupingEnabled="true"
