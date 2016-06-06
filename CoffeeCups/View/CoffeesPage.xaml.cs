@@ -7,23 +7,23 @@ using CoffeeCups.Helpers;
 
 namespace CoffeeCups
 {
-    public partial class CoffeesPage : ContentPage
-    {
+	public partial class CoffeesPage : ContentPage
+	{
 		CoffeesViewModel vm;
 
 		public CoffeesPage(CoffeesViewModel viewModel)
-        {
-            InitializeComponent();
+		{
+			InitializeComponent();
 
 			BindingContext = vm = viewModel;
 
 			toolBar.Clicked += (sender, e) => Navigation.PushAsync(new AddCoffeePage(new AddCoffeeViewModel()));
 
-            ListViewCoffees.ItemTapped += (sender, e) =>
-            {
-                if(Device.OS == TargetPlatform.iOS || Device.OS == TargetPlatform.Android)
-                    ListViewCoffees.SelectedItem = null;
-            };
+			ListViewCoffees.ItemTapped += (sender, e) =>
+			{
+				if (Device.OS == TargetPlatform.iOS || Device.OS == TargetPlatform.Android)
+					ListViewCoffees.SelectedItem = null;
+			};
 
 			if (Device.OS != TargetPlatform.iOS && Device.OS != TargetPlatform.Android)
 			{
@@ -33,31 +33,31 @@ namespace CoffeeCups
 					Command = vm.LoadCoffeesCommand
 				});
 			}
-        }
+		}
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
 
-            CrossConnectivity.Current.ConnectivityChanged += ConnecitvityChanged;
-            OfflineStack.IsVisible = !CrossConnectivity.Current.IsConnected;
-            if (vm.Coffees.Count == 0)
-                vm.LoadCoffeesCommand.Execute(null);
-        }
+			CrossConnectivity.Current.ConnectivityChanged += ConnecitvityChanged;
+			OfflineStack.IsVisible = !CrossConnectivity.Current.IsConnected;
+			if (vm.Coffees.Count == 0)
+				vm.LoadCoffeesCommand.Execute(null);
+		}
 
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-            CrossConnectivity.Current.ConnectivityChanged -= ConnecitvityChanged;
-        }
+		protected override void OnDisappearing()
+		{
+			base.OnDisappearing();
+			CrossConnectivity.Current.ConnectivityChanged -= ConnecitvityChanged;
+		}
 
-        void ConnecitvityChanged (object sender, Plugin.Connectivity.Abstractions.ConnectivityChangedEventArgs e)
-        {
-            Device.BeginInvokeOnMainThread(() =>
-            {
-            	OfflineStack.IsVisible = !e.IsConnected;
-            });
-        }
-    }
+		void ConnecitvityChanged(object sender, Plugin.Connectivity.Abstractions.ConnectivityChangedEventArgs e)
+		{
+			Device.BeginInvokeOnMainThread(() =>
+			{
+				OfflineStack.IsVisible = !e.IsConnected;
+			});
+		}
+	}
 }
 
