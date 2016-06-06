@@ -14,13 +14,16 @@
     		</Image.GestureRecognizers>
 		</Image>
 		<!--add name-->
-		<Entry HorizontalOptions="FillAndExpand"
+		<Entry x:Name="entry"
+			HorizontalOptions="FillAndExpand"
 			Placeholder="coffee name"
 			Text="{Binding Coffee.Name}"/>
 		<!--add description-->
-		<Editor HorizontalOptions="FillAndExpand"
+		<Editor x:Name="description"
+			HorizontalOptions="FillAndExpand"
 			VerticalOptions="FillAndExpand"
-			Text="{Binding Coffee.Notes}"/>
+			Text="{Binding Coffee.Notes}">
+		</Editor>
 		<!--loading message-->
 		<Label Text="{Binding LoadingMessage}"
 			IsVisible="{Binding IsBusy}"
