@@ -1,9 +1,10 @@
 ﻿using System;
 using Humanizer;
+using Xamarin.Forms;
 
 namespace CoffeeCups
 {
-	public class CupOfCoffee
+	public class CupOfCoffee : BindableObject
 	{
 		[Newtonsoft.Json.JsonProperty("Id")]
 		public string Id { get; set; }
@@ -39,7 +40,28 @@ namespace CoffeeCups
 		/// Gets or sets the image path
 		/// </summary>
 		/// <value>Image file path</value>
-		public string Image { get; set; }
+		//public string Image { get; set; }
+
+		/// <summary>
+		/// Thickness property of border
+		/// </summary>
+		public static readonly BindableProperty ImageProperty =
+			BindableProperty.Create(
+				nameof(Image), 
+				typeof(string), 
+       			typeof(CupOfCoffee),
+		        default(string));
+
+		/// <summary>
+		/// Gets or sets the image path
+		/// </summary>
+		/// <value>Image file path</value>
+		public string Image
+		{
+			get { return (string)GetValue(ImageProperty); }
+			set { SetValue(ImageProperty, value); }
+		}
+
 
 		[Newtonsoft.Json.JsonIgnore]
 		public string TimeDisplay => DateUtc.ToLocalTime().ToString("t");
