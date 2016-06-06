@@ -42,9 +42,6 @@ namespace CoffeeCups
 		/// <value>Image file path</value>
 		//public string Image { get; set; }
 
-		/// <summary>
-		/// Thickness property of border
-		/// </summary>
 		public static readonly BindableProperty ImageProperty =
 			BindableProperty.Create(
 				nameof(Image), 
@@ -52,10 +49,6 @@ namespace CoffeeCups
        			typeof(CupOfCoffee),
 		        default(string));
 
-		/// <summary>
-		/// Gets or sets the image path
-		/// </summary>
-		/// <value>Image file path</value>
 		public string Image
 		{
 			get { return (string)GetValue(ImageProperty); }
