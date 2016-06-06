@@ -21,17 +21,8 @@ namespace CoffeeCups
 			if (isInitialized)
 				return;
 
-			var handler = new AuthHandler();
-
 			//Create our client
-			MobileService = new MobileServiceClient("https://coffee-appreciator.azurewebsites.net", handler);
-			handler.Client = MobileService;
-
-			if (!string.IsNullOrWhiteSpace(Settings.AuthToken) && !string.IsNullOrWhiteSpace(Settings.UserId))
-			{
-				MobileService.CurrentUser = new MobileServiceUser(Settings.UserId);
-				MobileService.CurrentUser.MobileServiceAuthenticationToken = Settings.AuthToken;
-			}
+			MobileService = new MobileServiceClient("https://coffee-appreciator.azurewebsites.net", null);
 
 			const string path = "syncstore.db";
 
