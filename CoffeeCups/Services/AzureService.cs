@@ -24,7 +24,7 @@ namespace CoffeeCups
 			//Create our client
 			MobileService = new MobileServiceClient("https://coffee-appreciator.azurewebsites.net", null);
 
-			const string path = "syncstore.db";
+			const string path = "syncstores.db";
 
 			//setup our local sqlite store and intialize our table
 			var store = new MobileServiceSQLiteStore(path);
