@@ -6,7 +6,7 @@
 			VerticalOptions="StartAndExpand" 
 			HorizontalOptions="FillAndExpand">
 		<!--image view-->
-	    <Image Source="kopi_luwak.jpg"
+	    <Image Source="{Binding Coffee.Image}"
 			HorizontalOptions="FillAndExpand">
 			<Image.GestureRecognizers>
         		<TapGestureRecognizer Command="{Binding TakePhotoCommand}"/>
@@ -15,12 +15,11 @@
 		<!--add name-->
 		<Entry HorizontalOptions="FillAndExpand"
 			Placeholder="coffee name"
-			Text="{Binding Name}"/>
+			Text="{Binding Coffee.Name}"/>
 		<!--add description-->
 		<Editor HorizontalOptions="FillAndExpand"
 			VerticalOptions="FillAndExpand"
-			Text="{Binding Description}"
-			Keyboard="Chat"/>
+			Text="{Binding Coffee.Notes}"/>
 		<!--loading message-->
 		<Label Text="{Binding LoadingMessage}"
 			IsVisible="{Binding IsBusy}"

@@ -17,24 +17,24 @@ namespace CoffeeCups
 		ICommand takePhotoCommand;
 		ICommand addCoffeeCommand;
 		string loadingMessage;
-		string name = "";
-		string description = "coffee notes";
+		CupOfCoffee coffee;
 
 		public AddCoffeeViewModel()
 		{
+			coffee = new CupOfCoffee {
+				Name = "",
+				Notes = "",
+				Image = "kopi_luwak.jpg"
+					// TODO: the image string will be placeholder.jpg
+			};
 		}
 
 		App app = Application.Current as App;
 
-		public string Name
+		public CupOfCoffee Coffee
 		{
-			private set { SetProperty(ref name, value); }
-			get { return name; }
-		}
-		public string Description
-		{
-			private set { SetProperty(ref description, value); }
-			get { return description; }
+			private set { SetProperty(ref coffee, value); }
+			get { return coffee; }
 		}
 
 		public ICommand TakePhotoCommand =>
@@ -49,7 +49,7 @@ namespace CoffeeCups
 				return;
 			try
 			{
-				// take a photo and save it as a blob
+				// take a photo and save it
 				await CrossMedia.Current.Initialize();
 
 				if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
@@ -72,6 +72,8 @@ namespace CoffeeCups
 
 				if (file == null)
 					return;
+
+				coffee.Image = file.Path;
 
 				//TODO make this so it saves the image
 				MessagingService.Current.SendMessage<MessagingServiceAlert>("message", new MessagingServiceAlert
@@ -103,7 +105,7 @@ namespace CoffeeCups
 				IsBusy = true;
 
 				//TODO find how to pass image
-				await app.azureService.AddCoffee(name, description, "");
+				await app.azureService.AddCoffee(coffee);
 			}
 			catch (Exception ex)
 			{

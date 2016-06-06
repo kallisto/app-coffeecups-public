@@ -53,18 +53,12 @@ namespace CoffeeCups
 			return await coffeeTable.OrderByDescending(c => c.DateUtc).ToEnumerableAsync();
 		}
 
-		public async Task AddCoffee(string name, string description, string image)
+		public async Task AddCoffee(CupOfCoffee coffee)
 		{
 			await Initialize();
 
-			var coffee = new CupOfCoffee
-			{
-				OS = Device.OS.ToString(),
-				DateUtc = DateTime.UtcNow,
-				Name = name,
-				Notes = description,
-				//Image = path
-			};
+			coffee.OS = Device.OS.ToString();
+			coffee.DateUtc = DateTime.UtcNow;
 
 			await coffeeTable.InsertAsync(coffee);
 
