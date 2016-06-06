@@ -5,13 +5,6 @@ namespace CoffeeCups
 {
 	public class CupOfCoffee
 	{
-		/// <summary>
-		/// Gets or sets the user identifier.
-		/// </summary>
-		/// <value>The user identifier.</value>
-		[Newtonsoft.Json.JsonProperty("userId")]
-		public string UserId { get; set; }
-
 		[Newtonsoft.Json.JsonProperty("Id")]
 		public string Id { get; set; }
 
