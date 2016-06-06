@@ -1,7 +1,7 @@
-﻿using ImageCircle.Forms.Plugin.Abstractions;
-using System;
+﻿using System;
 using System.Linq;
 using Xamarin.Forms;
+using ImageCircle.Forms.Plugin.Abstractions;
 using ImageCircle.Forms.Plugin.iOS;
 using Xamarin.Forms.Platform.iOS;
 using System.ComponentModel;
@@ -32,7 +32,9 @@ namespace ImageCircle.Forms.Plugin.iOS
 
 		protected override void OnElementChanged(ElementChangedEventArgs<Image> e)
 		{
+			// checking the Element here (the image) instead of the Control
 			base.OnElementChanged(e);
+
 			if (Element == null)
 				return;
 			CreateCircle();
@@ -69,7 +71,7 @@ namespace ImageCircle.Forms.Plugin.iOS
 				{
 					tintLayer = new CoreAnimation.CALayer
 					{
-						BackgroundColor = UIKit.UIColor.Green.CGColor,
+						BackgroundColor = UIKit.UIColor.White.CGColor,
 						Opacity = 0.5f
 					};
 					Control.Layer.AddSublayer(tintLayer);
