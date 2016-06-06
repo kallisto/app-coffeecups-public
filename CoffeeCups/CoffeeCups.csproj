@@ -51,7 +51,6 @@
     <Compile Include="Services\AuthHandler.cs" />
     <Compile Include="Data\DesignTimeCoffees.cs" />
     <Compile Include="Helpers\CircleImage.cs" />
-    <Compile Include="Services\MediaService.cs" />
     <Compile Include="View\AddCoffeePage.xaml.cs">
       <DependentUpon>AddCoffeePage.xaml</DependentUpon>
     </Compile>
