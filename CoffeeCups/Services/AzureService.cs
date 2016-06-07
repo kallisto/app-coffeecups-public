@@ -21,19 +21,10 @@ namespace CoffeeCups
 			if (isInitialized)
 				return;
 
-			var handler = new AuthHandler();
-
 			//Create our client
-			MobileService = new MobileServiceClient("https://coffee-appreciator.azurewebsites.net", handler);
-			handler.Client = MobileService;
+			MobileService = new MobileServiceClient("https://coffee-appreciator.azurewebsites.net", null);
 
-			if (!string.IsNullOrWhiteSpace(Settings.AuthToken) && !string.IsNullOrWhiteSpace(Settings.UserId))
-			{
-				MobileService.CurrentUser = new MobileServiceUser(Settings.UserId);
-				MobileService.CurrentUser.MobileServiceAuthenticationToken = Settings.AuthToken;
-			}
-
-			const string path = "syncstore.db";
+			const string path = "syncstores.db";
 
 			//setup our local sqlite store and intialize our table
 			var store = new MobileServiceSQLiteStore(path);

@@ -1,17 +1,11 @@
 ﻿using System;
 using Humanizer;
+using Xamarin.Forms;
 
 namespace CoffeeCups
 {
-	public class CupOfCoffee
+	public class CupOfCoffee : BindableObject
 	{
-		/// <summary>
-		/// Gets or sets the user identifier.
-		/// </summary>
-		/// <value>The user identifier.</value>
-		[Newtonsoft.Json.JsonProperty("userId")]
-		public string UserId { get; set; }
-
 		[Newtonsoft.Json.JsonProperty("Id")]
 		public string Id { get; set; }
 
@@ -46,7 +40,20 @@ namespace CoffeeCups
 		/// Gets or sets the image path
 		/// </summary>
 		/// <value>Image file path</value>
-		public string Image { get; set; }
+		//public string Image { get; set; }
+		public static readonly BindableProperty ImageProperty =
+			BindableProperty.Create(
+				nameof(Image), 
+				typeof(string), 
+				typeof(CupOfCoffee),
+				default(string));
+
+		public string Image
+		{
+			get { return (string)GetValue(ImageProperty); }
+			set { SetValue(ImageProperty, value); }
+		}
+
 
 		[Newtonsoft.Json.JsonIgnore]
 		public string TimeDisplay => DateUtc.ToLocalTime().ToString("t");
@@ -55,4 +62,3 @@ namespace CoffeeCups
 		public string DateDisplay => $"{DateUtc.DayOfWeek.ToString()}, {DateUtc.ToLocalTime().ToString("MMMM")} {DateUtc.ToLocalTime().Day.Ordinalize()}";
 	}
 }
-

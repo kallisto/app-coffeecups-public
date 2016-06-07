@@ -13,8 +13,11 @@ namespace ImageCircle.Forms.Plugin.Abstractions
 		/// Thickness property of border
 		/// </summary>
 		public static readonly BindableProperty BorderThicknessProperty =
-		  BindableProperty.Create<CircleImage, int>(
-			p => p.BorderThickness, 0);
+			BindableProperty.Create(
+				nameof(BorderThickness),
+				typeof(int),
+				typeof(CircleImage),
+				0);
 
 		/// <summary>
 		/// Border thickness of circle image
@@ -29,8 +32,11 @@ namespace ImageCircle.Forms.Plugin.Abstractions
 		/// Color property of border
 		/// </summary>
 		public static readonly BindableProperty BorderColorProperty =
-		  BindableProperty.Create<CircleImage, Color>(
-			p => p.BorderColor, Color.White);
+			BindableProperty.Create(
+				nameof(BorderColor),
+				typeof(Color),
+				typeof(CircleImage),
+				Color.White);
 
 		/// <summary>
 		/// Border Color of circle image
@@ -45,8 +51,11 @@ namespace ImageCircle.Forms.Plugin.Abstractions
 		/// Color property of fill
 		/// </summary>
 		public static readonly BindableProperty FillColorProperty =
-		  BindableProperty.Create<CircleImage, Color>(
-			p => p.FillColor, Color.Transparent);
+			BindableProperty.Create(
+				nameof(FillColor),
+				typeof(Color),
+				typeof(CircleImage),
+				Color.Transparent);
 
 		/// <summary>
 		/// Fill color of circle image

@@ -2,34 +2,45 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 		x:Class="CoffeeCups.AddCoffeePage">
-	<StackLayout Orientation="Vertical"
-			VerticalOptions="StartAndExpand" 
-			HorizontalOptions="FillAndExpand">
-		<!--image view-->
-	    <Image Source="{Binding Coffee.Image}"
-			HorizontalOptions="FillAndExpand">
-			<Image.GestureRecognizers>
-        		<TapGestureRecognizer Command="{Binding TakePhotoCommand}"/>
-    		</Image.GestureRecognizers>
-		</Image>
-		<!--add name-->
-		<Entry HorizontalOptions="FillAndExpand"
-			Placeholder="coffee name"
-			Text="{Binding Coffee.Name}"/>
-		<!--add description-->
-		<Editor HorizontalOptions="FillAndExpand"
-			VerticalOptions="FillAndExpand"
-			Text="{Binding Coffee.Notes}"/>
-		<!--loading message-->
-		<Label Text="{Binding LoadingMessage}"
-			IsVisible="{Binding IsBusy}"
-			HorizontalOptions="FillAndExpand"
-			VerticalOptions="FillAndExpand"/>
-		<!--add button-->
-		<Button x:Name="AddNewCoffee"
-			HorizontalOptions="FillAndExpand"
-			Text="Add Coffee"
-			Command="{Binding AddCoffeeCommand}"
-			IsEnabled="{Binding IsNotBusy}"/>
-  	</StackLayout>
+	<ScrollView Orientation="Vertical" 
+			VerticalOptions="StartAndExpand">
+		<StackLayout Orientation="Vertical"
+				VerticalOptions="StartAndExpand" 
+				HorizontalOptions="FillAndExpand">
+			<!--image view-->
+			<Image x:Name="coffeeImage"
+				Source="{Binding Coffee.Image}"
+				HorizontalOptions="FillAndExpand">
+				<Image.GestureRecognizers>
+					<TapGestureRecognizer Command="{Binding TakePhotoCommand}"/>
+				</Image.GestureRecognizers>
+			</Image>
+			<!--add name-->
+			<Label Text="Name:"
+				HorizontalOptions="FillAndExpand"
+				VerticalOptions="FillAndExpand"/>
+			<Entry x:Name="entry"
+				HorizontalOptions="FillAndExpand"
+				Text="{Binding Coffee.Name}"/>
+			<!--add description-->
+			<Label Text="Notes:"
+				HorizontalOptions="FillAndExpand"
+				VerticalOptions="FillAndExpand"/>
+			<Editor x:Name="description"
+				HorizontalOptions="FillAndExpand"
+				VerticalOptions="FillAndExpand"
+				Text="{Binding Coffee.Notes}" />
+			<!--loading message-->
+			<Label Text="{Binding LoadingMessage}"
+				IsVisible="{Binding IsBusy}"
+				HorizontalOptions="FillAndExpand"
+				VerticalOptions="FillAndExpand"/>
+			<!--add button-->
+			<Button x:Name="AddNewCoffee"
+				HorizontalOptions="FillAndExpand"
+				Text="Add Coffee"
+				Command="{Binding AddCoffeeCommand}"
+				IsEnabled="{Binding IsNotBusy}"/>
+		</StackLayout>
+	</ScrollView>
 </ContentPage>
