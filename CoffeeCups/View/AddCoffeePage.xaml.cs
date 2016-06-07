@@ -14,14 +14,8 @@ namespace CoffeeCups
 
 			BindingContext = vm;
 
-			entry.Effects.Add(Effect.Resolve("Xamarin.BackgroundColorEffect"));
-			description.Effects.Add(Effect.Resolve("Xamarin.BackgroundColorEffect"));
-
-			/*AddNewCoffee.Clicked += (sender, e) => 
-			{
-				if (AddNewCoffee.IsEnabled)
-					Navigation.PopAsync();
-			};*/
+			//entry.Effects.Add(Effect.Resolve("Xamarin.BackgroundColorEffect"));
+			//description.Effects.Add(Effect.Resolve("Xamarin.BackgroundColorEffect"));
 
 		}
 	}

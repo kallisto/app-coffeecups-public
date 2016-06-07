@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-		x:Class="CoffeeCups.AddCoffeePage"
-		Title="Add Coffee">
+		x:Class="CoffeeCups.AddCoffeePage">
 	<ScrollView Orientation="Vertical" 
 			VerticalOptions="StartAndExpand">
 		<StackLayout Orientation="Vertical"
 				VerticalOptions="StartAndExpand" 
 				HorizontalOptions="FillAndExpand">
 			<!--image view-->
-			<Image Source="{Binding Coffee.Image}"
+			<Image x:Name="coffeeImage"
+				Source="{Binding Coffee.Image}"
 				HorizontalOptions="FillAndExpand">
 				<Image.GestureRecognizers>
 					<TapGestureRecognizer Command="{Binding TakePhotoCommand}"/>
 				</Image.GestureRecognizers>
 			</Image>
 			<!--add name-->
+			<Label Text="Name:"
+				HorizontalOptions="FillAndExpand"
+				VerticalOptions="FillAndExpand"/>
 			<Entry x:Name="entry"
 				HorizontalOptions="FillAndExpand"
-				Placeholder="Name:"
 				Text="{Binding Coffee.Name}"/>
-					<!--loading message-->
+			<!--add description-->
 			<Label Text="Notes:"
 				HorizontalOptions="FillAndExpand"
 				VerticalOptions="FillAndExpand"/>
-			<!--add description-->
 			<Editor x:Name="description"
 				HorizontalOptions="FillAndExpand"
 				VerticalOptions="FillAndExpand"
