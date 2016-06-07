@@ -1,44 +1,24 @@
-﻿#if WINDOWS_UWP
-using ImageCircle.Forms.Plugin.UWP;
-using Xamarin.Forms.Platform.UWP;
-#else
-using ImageCircle.Forms.Plugin.WindowsPhoneRT;
-using Xamarin.Forms.Platform.WinRT;
-#endif
-using System;
-using System.IO;
-using Windows.ApplicationModel;
-using Windows.Storage;
+﻿using System;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Shapes;
 using Xamarin.Forms;
 using ImageCircle.Forms.Plugin.Abstractions;
+using ImageCircle.Forms.Plugin.UWP;
+using Xamarin.Forms.Platform.UWP;
 
 [assembly: ExportRenderer(typeof(CircleImage), typeof(ImageCircleRenderer))]
-#if WINDOWS_UWP
 namespace ImageCircle.Forms.Plugin.UWP
-#else
-namespace ImageCircle.Forms.Plugin.WindowsPhoneRT
-#endif
 {
-    /// <summary>
-    /// ImageCircle Implementation
-    /// </summary>
     public class ImageCircleRenderer : ViewRenderer<Image, Ellipse>
     {
         /// <summary>
         /// Used for registration with dependency service
         /// </summary>
-        public async static void Init()
+        public static void Initialize()
         {
             var temp = DateTime.Now;
         }
 
-        /// <summary>
-        /// Register circle
-        /// </summary>
-        /// <param name="e"></param>
 		protected override void OnElementChanged(ElementChangedEventArgs<Image> e)
         {
             base.OnElementChanged(e);
@@ -47,16 +27,10 @@ namespace ImageCircle.Forms.Plugin.WindowsPhoneRT
 
             var ellipse = new Ellipse();
             SetNativeControl(ellipse);
-
         }
 
         Xamarin.Forms.ImageSource file = null;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         protected async override void OnElementPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
