@@ -15,7 +15,7 @@ namespace CoffeeCups.iOS
 		{
 			try
 			{
-				Control.BackgroundColor = UIColor.FromRGB(204, 153, 255);
+				Control.BackgroundColor = UIColor.FromRGB(109, 0, 0);
 			}
 			catch (Exception ex)
 			{
@@ -25,7 +25,6 @@ namespace CoffeeCups.iOS
 
 		protected override void OnDetached()
 		{
-
 		}
 	}
 }
