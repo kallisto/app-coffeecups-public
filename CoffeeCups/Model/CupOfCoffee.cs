@@ -41,13 +41,12 @@ namespace CoffeeCups
 		/// </summary>
 		/// <value>Image file path</value>
 		//public string Image { get; set; }
-
 		public static readonly BindableProperty ImageProperty =
 			BindableProperty.Create(
 				nameof(Image), 
 				typeof(string), 
-       			typeof(CupOfCoffee),
-		        default(string));
+				typeof(CupOfCoffee),
+				default(string));
 
 		public string Image
 		{
@@ -63,4 +62,3 @@ namespace CoffeeCups
 		public string DateDisplay => $"{DateUtc.DayOfWeek.ToString()}, {DateUtc.ToLocalTime().ToString("MMMM")} {DateUtc.ToLocalTime().Day.Ordinalize()}";
 	}
 }
-

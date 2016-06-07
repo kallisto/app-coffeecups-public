@@ -6,8 +6,6 @@ using System.Diagnostics;
 using Xamarin.Forms;
 using FormsToolkit;
 using System.Linq;
-using CoffeeCups.Helpers;
-using Microsoft.WindowsAzure.MobileServices;
 
 namespace CoffeeCups
 {
