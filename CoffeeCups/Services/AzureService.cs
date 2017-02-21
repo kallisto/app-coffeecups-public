@@ -22,7 +22,7 @@ namespace CoffeeCups
 				return;
 
 			//Create our client
-			MobileService = new MobileServiceClient("https://coffeecupsservice.azurewebsites.net", null);
+			MobileService = new MobileServiceClient("https://YOU-RURL-HERE.azurewebsites.net", null);
 
 			const string path = "syncstore_new.db";
 
