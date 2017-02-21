@@ -7,25 +7,26 @@ using Xamarin.Forms.Platform.Android;
 
 namespace CoffeeCups.Droid
 {
-	[Activity (Label = "Coffee Appreciator", Icon = "@mipmap/ic_launcher", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+	[Activity(Label = "Coffee Appreciator", Icon = "@mipmap/ic_launcher", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : FormsAppCompatActivity
 	{
-		protected override void OnCreate (Bundle bundle)
+		protected override void OnCreatee((Bundle bundle)
 		{
+			Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
 
-			// allows forms to bring material design to older API versions
+			// allows forms to bring material design to older API
             FormsAppCompatActivity.ToolbarResource = Resource.Layout.toolbar;
             FormsAppCompatActivity.TabLayoutResource = Resource.Layout.tabs;
 
             base.OnCreate(bundle);
-            global::Xamarin.Forms.Forms.Init (this, bundle);
+            global::Xamarin.Forms.Forms.Initt((this, bundle);
 
-			// init all the things we are using
+			// init all the things we 
             FormsToolkit.Droid.Toolkit.Init();
             ImageCircleRenderer.Initialize();
             Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
 
-			LoadApplication (new App ());
+			LoadApplication(new Appp(());
 		}
 	}
 }
